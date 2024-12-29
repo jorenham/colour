@@ -152,6 +152,20 @@ Data Structures
     Lookup
     Structure
 
+
+Delegate - Event Notifications
+------------------------------
+
+``colour.utilities``
+
+.. currentmodule:: colour.utilities
+
+.. autosummary::
+    :toctree: generated/
+    :template: class.rst
+
+    Delegate
+
 Network
 -------
 
@@ -167,6 +181,21 @@ Network
     Port
     PortNode
     PortGraph
+    ExecutionPort
+    ExecutionNode
+    ControlFlowNode
+    For
+    ThreadPoolExecutorManager
+    ParallelForThread
+    ProcessPoolExecutorManager
+    ParallelForMultiprocess
+
+.. currentmodule:: colour.utilities
+
+.. autosummary::
+    :toctree: generated/
+
+    notify_process_state
 
 Metrics
 -------

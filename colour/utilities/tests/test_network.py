@@ -24,6 +24,7 @@ from colour.utilities import (
 from colour.utilities.network import (
     ProcessPoolExecutorManager,
     ThreadPoolExecutorManager,
+    notify_process_state,
 )
 
 __author__ = "Colour Developers"
@@ -452,6 +453,7 @@ class _NodeAdd(ExecutionNode):
         self.add_input_port("b")
         self.add_output_port("output")
 
+    @notify_process_state
     def process(self) -> None:
         a = self.get_input("a")
         b = self.get_input("b")
@@ -474,6 +476,7 @@ class _NodeMultiply(ExecutionNode):
         self.add_input_port("b")
         self.add_output_port("output")
 
+    @notify_process_state
     def process(self) -> None:
         a = self.get_input("a")
         b = self.get_input("b")
@@ -484,6 +487,42 @@ class _NodeMultiply(ExecutionNode):
         self.set_output("output", a * b)
 
         self.dirty = False
+
+
+class TestNotifyProcessState:
+    """
+    Define :func:`colour.utilities.network.notify_process_state` definition
+    unit tests methods.
+    """
+
+    def test_notify_process_state(self) -> None:
+        """
+        Test :func:`colour.utilities.network.notify_process_state` definition.
+        """
+
+        data = []
+
+        def _listener_on_process_start_(self: _NodeAdd) -> None:  # noqa: ARG001
+            """Define a unit tests listener."""
+
+            data.append("Foo")
+
+        def _listener_on_process_end(self: _NodeAdd) -> None:  # noqa: ARG001
+            """Define a unit tests listener."""
+
+            data.append("Bar")
+
+        add = _NodeAdd()
+        add.on_process_started.add_listener(_listener_on_process_start_)
+        add.on_process_ended.add_listener(_listener_on_process_end)
+
+        add.set_input("a", 1)
+        add.set_input("b", 1)
+
+        add.process()
+
+        assert add.get_output("output") == 2
+        assert data == ["Foo", "Bar"]
 
 
 class TestPortNode:
@@ -903,6 +942,7 @@ class _AddItem(ExecutionNode):
         self.add_input_port("value")
         self.add_input_port("mapping", {})
 
+    @notify_process_state
     def process(self) -> None:
         """
         Process the node.
@@ -928,6 +968,7 @@ class _NodeSumMappingValues(ExecutionNode):
         self.add_input_port("mapping", {})
         self.add_output_port("summation")
 
+    @notify_process_state
     def process(self) -> None:
         mapping = self.get_input("mapping")
         if len(mapping) == 0:
@@ -990,6 +1031,7 @@ class _SubGraph1(ExecutionNode, PortGraph):
         self.connect("input", self.nodes["Add Item"], "key")
         self.nodes["Add Item"].connect("mapping", self, "output")
 
+    @notify_process_state
     def process(self, **kwargs: Any) -> None:
         self.nodes["Add 1"].set_input("a", 1)
         self.nodes["Multiply 1"].set_input("b", 2)
@@ -1030,6 +1072,7 @@ class _NodeSumArray(ExecutionNode):
         self.add_input_port("array", [])
         self.add_output_port("summation")
 
+    @notify_process_state
     def process(self) -> None:
         array = self.get_input("array")
         if len(array) == 0:
@@ -1082,6 +1125,7 @@ class _SubGraph2(ExecutionNode, PortGraph):
         self.connect("input", self.nodes["Add 1"], "b")
         self.nodes["Add 2"].connect("output", self, "output")
 
+    @notify_process_state
     def process(self, **kwargs: Any) -> None:
         self.nodes["Add 1"].set_input("a", 1)
         self.nodes["Multiply 1"].set_input("b", 2)

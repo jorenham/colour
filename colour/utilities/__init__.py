@@ -134,10 +134,12 @@ from .array import (
     index_along_last_axis,
     format_array_as_row,
 )
+from .delegate import Delegate
 from .metrics import metric_mse, metric_psnr
 from .network import (
     TreeNode,
     Port,
+    notify_process_state,
     PortNode,
     PortGraph,
     ExecutionPort,
@@ -278,6 +280,7 @@ __all__ += [
     "index_along_last_axis",
     "format_array_as_row",
 ]
+__all__ += ["Delegate"]
 __all__ += [
     "metric_mse",
     "metric_psnr",
@@ -285,6 +288,7 @@ __all__ += [
 __all__ += [
     "TreeNode",
     "Port",
+    "notify_process_state",
     "PortNode",
     "PortGraph",
     "ExecutionPort",
