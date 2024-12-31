@@ -148,6 +148,10 @@ from .network import (
     For,
     ParallelForThread,
     ParallelForMultiprocess,
+    NodePassthrough,
+    NodeLog,
+    NodeSleep,
+    NodeSetGraphOutputPort,
 )
 from colour.utilities.deprecation import ModuleAPI, build_API_changes
 from colour.utilities.documentation import is_documentation_building
@@ -297,6 +301,10 @@ __all__ += [
     "For",
     "ParallelForThread",
     "ParallelForMultiprocess",
+    "NodePassthrough",
+    "NodeLog",
+    "NodeSleep",
+    "NodeSetGraphOutputPort",
 ]
 
 

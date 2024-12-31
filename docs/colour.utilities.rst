@@ -189,6 +189,10 @@ Network
     ParallelForThread
     ProcessPoolExecutorManager
     ParallelForMultiprocess
+    NodePassthrough
+    NodeLog
+    NodeSleep
+    NodeSetGraphOutput
 
 .. currentmodule:: colour.utilities
 
