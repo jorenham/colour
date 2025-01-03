@@ -991,6 +991,7 @@ class PortNode(TreeNode, MixinLogging):
     -   :attr:`~colour.utilities.PortNode.dirty`
     -   :attr:`~colour.utilities.PortNode.edges`
     -   :attr:`~colour.utilities.PortNode.description`
+    -   :attr:`~colour.utilities.PortNode.category`
 
     Methods
     -------
@@ -1047,13 +1048,16 @@ class PortNode(TreeNode, MixinLogging):
     2
     """
 
-    def __init__(self, name: str | None = None, description: str = "") -> None:
+    def __init__(
+        self, name: str | None = None, description: str = "", category: str = "Default"
+    ) -> None:
         super().__init__(name)
         self.description = description
+        self.category = category
 
-        self._input_ports = {}
-        self._output_ports = {}
-        self._dirty = True
+        self._input_ports: Dict = {}
+        self._output_ports: Dict = {}
+        self._dirty: bool = True
 
         self.on_connected: Delegate = Delegate()
         self.on_disconnected: Delegate = Delegate()
@@ -1174,6 +1178,36 @@ class PortNode(TreeNode, MixinLogging):
         )
 
         self._description = value
+
+    @property
+    def category(self) -> str:
+        """
+        Getter and setter property for the node category.
+
+        Parameters
+        ----------
+        value
+            Value to set the node category with.
+
+        Returns
+        -------
+        :class:`str` or None
+            Node category.
+        """
+
+        return self._category
+
+    @category.setter
+    def category(self, value: str) -> None:
+        """Setter for the **self.category** property."""
+
+        attest(
+            value is None or isinstance(value, str),
+            f'"category" property: "{value}" is not "None" or '
+            f'its type is not "str"!',
+        )
+
+        self._category = value
 
     def add_input_port(
         self,
@@ -1690,9 +1724,9 @@ class PortGraph(PortNode):
 
         self._name: str = self.__class__.__name__
         self.name = optional(name, self._name)
-        self.description = description
+        self.description: str = description
 
-        self._nodes = {}
+        self._nodes: dict = {}
 
     @property
     def nodes(self) -> Dict[str, PortNode]:
@@ -2112,7 +2146,7 @@ class ControlFlowNode(ExecutionNode):
     """Define a class inherited by control flow nodes."""
 
     def __init__(self, *args: Any, **kwargs: Any) -> None:
-        super().__init__(*args, **kwargs)
+        super().__init__(*args, **{"category": "ControlFlow", **kwargs})
 
 
 class For(ControlFlowNode):
@@ -2548,7 +2582,7 @@ class NodePassthrough(PortNode):
     """
 
     def __init__(self, *args: Any, **kwargs: Any) -> None:
-        super().__init__(*args, **kwargs)
+        super().__init__(*args, **{"category": "Utilities", **kwargs})
 
         self.description = "Pass the input data through"
 
@@ -2577,7 +2611,7 @@ class NodeLog(ExecutionNode):
     """
 
     def __init__(self, *args: Any, **kwargs: Any) -> None:
-        super().__init__(*args, **kwargs)
+        super().__init__(*args, **{"category": "Verbose", **kwargs})
 
         self.description = "Log the input data"
 
@@ -2606,7 +2640,7 @@ class NodeSleep(ExecutionNode):
     """
 
     def __init__(self, *args: Any, **kwargs: Any) -> None:
-        super().__init__(*args, **kwargs)
+        super().__init__(*args, **{"category": "Time", **kwargs})
 
         self.description = "Sleep for given duration in seconds"
 
@@ -2634,7 +2668,7 @@ class NodeSetGraphOutputPort(ExecutionNode):
     """
 
     def __init__(self, *args: Any, **kwargs: Any) -> None:
-        super().__init__(*args, **kwargs)
+        super().__init__(*args, **{"category": "Utilities", **kwargs})
 
         self.description = (
             "Set the parent graph output port with given name with given value"

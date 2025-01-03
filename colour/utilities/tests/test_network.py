@@ -557,6 +557,7 @@ class TestPortNode:
             "dirty",
             "edges",
             "description",
+            "category",
         )
 
         for attribute in required_attributes:
