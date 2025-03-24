@@ -307,7 +307,7 @@ class Specification_Fichet2021:
     References
     ----------
     :cite:`Fichet2021`
-    """  # noqa: D405, D407, D410, D411
+    """
 
     path: str | None = field(default_factory=lambda: None)
     components: defaultdict = field(default_factory=lambda: defaultdict(dict))
@@ -848,13 +848,13 @@ def write_spectral_image_Fichet2021(
         for i, wavelength in enumerate(wavelengths):
             component_type = str(component)[0]
             if component_type == "S":  # Emissive Component Type # noqa: SIM114
-                channel_name = f'{component}.{str(wavelength).replace(".", ",")}nm'
+                channel_name = f"{component}.{str(wavelength).replace('.', ',')}nm"
             elif component_type == "T":  # Reflectance et al. Component Type
-                channel_name = f'{component}.{str(wavelength).replace(".", ",")}nm'
+                channel_name = f"{component}.{str(wavelength).replace('.', ',')}nm"
             else:  # Bi-spectral Component Type
                 channel_name = (
-                    f'T.{str(component).replace(".", ",")}nm.'
-                    f'{str(wavelength).replace(".", ",")}nm'
+                    f"T.{str(component).replace('.', ',')}nm."
+                    f"{str(wavelength).replace('.', ',')}nm"
                 )
 
             channels[channel_name] = values[..., i]

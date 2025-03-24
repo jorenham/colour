@@ -262,9 +262,9 @@ def XYZ_to_UCS_Li2017(
     specification = XYZ_to_CAM16(XYZ, **settings)
     JMh = tstack(
         [
-            cast(NDArrayFloat, specification.J),
-            cast(NDArrayFloat, specification.M),
-            cast(NDArrayFloat, specification.h),
+            cast("NDArrayFloat", specification.J),
+            cast("NDArrayFloat", specification.M),
+            cast("NDArrayFloat", specification.h),
         ]
     )
 

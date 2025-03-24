@@ -176,7 +176,7 @@ def add_attributes_to_image_specification_OpenImageIO(
     ... )  # doctest: +SKIP
     >>> image_specification.extra_attribs[0].value  # doctest: +SKIP
     'none'
-    """  # noqa: D405, D407, D410, D411
+    """
 
     for attribute in attributes:
         name = str(attribute.name)
@@ -234,11 +234,11 @@ def image_specification_OpenImageIO(
     ...     1920, 1080, 3, "float16", [compression]
     ... )  # doctest: +SKIP
     <OpenImageIO.ImageSpec object at 0x...>
-    """  # noqa: D405, D407, D410, D411
+    """
 
     from OpenImageIO import ImageSpec  # pyright: ignore
 
-    attributes = cast(list, optional(attributes, []))
+    attributes = cast("list", optional(attributes, []))
 
     bit_depth_specification = MAPPING_BIT_DEPTH[bit_depth]
 
@@ -439,7 +439,7 @@ def read_image_OpenImageIO(
     image_input.close()
 
     image = np.reshape(np.array(image, dtype=bit_depth_specification.numpy), shape)
-    image = cast(NDArrayReal, np.squeeze(image))
+    image = cast("NDArrayReal", np.squeeze(image))
 
     if additional_data:
         extra_attributes = [
@@ -687,14 +687,14 @@ def write_image_OpenImageIO(
     ...         Image_Specification_Attribute("compression", "none"),
     ...     ]
     ...     write_image_OpenImageIO(image, path, attributes=attributes)
-    """  # noqa: D405, D407, D410, D411
+    """
 
     from OpenImageIO import ImageOutput  # pyright: ignore
 
     image = as_float_array(image)
     path = str(path)
 
-    attributes = cast(list, optional(attributes, []))
+    attributes = cast("list", optional(attributes, []))
 
     bit_depth_specification = MAPPING_BIT_DEPTH[bit_depth]
 
@@ -901,7 +901,7 @@ Source/FreeImage.h
     >>> write_image(image, path, bit_depth="uint8", attributes=[compression])
     ... # doctest: +SKIP
     True
-    """  # noqa: D405, D407, D410, D411, D414
+    """
 
     method = validate_method(method, tuple(WRITE_IMAGE_METHODS))
 

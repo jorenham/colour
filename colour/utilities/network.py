@@ -136,7 +136,7 @@ class TreeNode:
     _INSTANCE_ID
     """
 
-    def __new__(cls, *args: Any, **kwargs: Any) -> Self:  # noqa: ARG003
+    def __new__(cls, *args: Any, **kwargs: Any) -> Self:
         """
         Return a new instance of the :class:`colour.utilities.Node` class.
 
@@ -150,7 +150,7 @@ class TreeNode:
 
         instance = super().__new__(cls)
 
-        instance._id = TreeNode._INSTANCE_ID  # pyright: ignore # noqa: SLF001
+        instance._id = TreeNode._INSTANCE_ID  # pyright: ignore
         TreeNode._INSTANCE_ID += 1
 
         return instance
@@ -741,8 +741,7 @@ class Port(MixinLogging):
 
         attest(
             value is None or isinstance(value, PortNode),
-            f'"node" property: "{value}" is not "None" or '
-            f'its type is not "PortNode"!',
+            f'"node" property: "{value}" is not "None" or its type is not "PortNode"!',
         )
 
         self._node = value

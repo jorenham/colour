@@ -284,9 +284,9 @@ def CIECAM02_to_JMh_CIECAM02(
 
     return tstack(
         [
-            cast(NDArrayFloat, specification.J),
-            cast(NDArrayFloat, specification.M),
-            cast(NDArrayFloat, specification.h),
+            cast("NDArrayFloat", specification.J),
+            cast("NDArrayFloat", specification.M),
+            cast("NDArrayFloat", specification.h),
         ]
     )
 
@@ -1098,7 +1098,7 @@ def _conversion_path(source: str, target: str) -> List[Callable]:
         # Updating the :attr:`CONVERSION_GRAPH` attributes.
         colour.graph.CONVERSION_GRAPH = CONVERSION_GRAPH = _build_graph()
 
-    path = nx.shortest_path(cast(nx.DiGraph, CONVERSION_GRAPH), source, target)
+    path = nx.shortest_path(cast("nx.DiGraph", CONVERSION_GRAPH), source, target)
 
     return [
         CONVERSION_GRAPH.get_edge_data(a, b)["conversion_function"]  # pyright: ignore

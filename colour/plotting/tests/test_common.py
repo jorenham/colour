@@ -299,7 +299,7 @@ class TestLabelRectangles:
         samples = np.linspace(0, 1, 10)
 
         _figure, axes = label_rectangles(
-            cast(List[float], samples.tolist()),
+            cast("List[float]", samples.tolist()),
             axes.bar(samples, 1),
             figure=figure,
             axes=axes,
@@ -318,7 +318,7 @@ class TestUniformAxes3d:
         """Test :func:`colour.plotting.common.uniform_axes3d` definition."""
 
         figure, _axes = artist()
-        axes = cast(Axes3D, figure.add_subplot(111, projection="3d"))
+        axes = cast("Axes3D", figure.add_subplot(111, projection="3d"))
 
         uniform_axes3d(axes=axes)
 

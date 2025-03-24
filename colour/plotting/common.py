@@ -225,7 +225,7 @@ CONSTANTS_COLOUR_STYLE: Structure = Structure(
 # affecting *Matplotplib* ones.
 for _scaling, _value in CONSTANTS_COLOUR_STYLE.font.scaling.items():
     matplotlib.font_manager.font_scalings[
-        f'{_scaling.replace("_", "-")}-colour-science'
+        f"{_scaling.replace('_', '-')}-colour-science"
     ] = _value
 
 del _scaling, _value
@@ -541,13 +541,13 @@ def artist(**kwargs: KwargsArtist | Any) -> Tuple[Figure, Axes]:
 
         return figure, figure.gca()
 
-    axes = cast(Axes, axes)
+    axes = cast("Axes", axes)
     figure = axes.figure
 
     if isinstance(figure, SubFigure):
         figure = figure.get_figure()
 
-    return cast(Figure, figure), axes
+    return cast("Figure", figure), axes
 
 
 class KwargsCamera(TypedDict):
@@ -592,8 +592,8 @@ def camera(**kwargs: KwargsCamera | Any) -> Tuple[Figure, Axes3D]:
         Current figure and axes.
     """
 
-    figure = cast(Figure, kwargs.get("figure", plt.gcf()))
-    axes = cast(Axes3D, kwargs.get("axes", plt.gca()))
+    figure = cast("Figure", kwargs.get("figure", plt.gcf()))
+    axes = cast("Axes3D", kwargs.get("axes", plt.gca()))
 
     settings = Structure(camera_aspect="equal", elevation=None, azimuth=None)
     settings.update(kwargs)
@@ -700,8 +700,8 @@ def render(
         Current figure and axes.
     """
 
-    figure = cast(Figure, kwargs.get("figure", plt.gcf()))
-    axes = cast(Axes, kwargs.get("axes", plt.gca()))
+    figure = cast("Figure", kwargs.get("figure", plt.gcf()))
+    axes = cast("Axes", kwargs.get("axes", plt.gca()))
 
     kwargs = handle_arguments_deprecation(
         {
@@ -1314,12 +1314,12 @@ def plot_multi_colour_swatches(
     if not isinstance(first_item(colour_swatches), ColourSwatch):
         for _i, colour_swatch in enumerate(
             np.reshape(
-                as_float_array(cast(ArrayLike, colour_swatches))[..., :3], (-1, 3)
+                as_float_array(cast("ArrayLike", colour_swatches))[..., :3], (-1, 3)
             )
         ):
             colour_swatches_converted.append(ColourSwatch(colour_swatch))
     else:
-        colour_swatches_converted = cast(List[ColourSwatch], colour_swatches)
+        colour_swatches_converted = cast("List[ColourSwatch]", colour_swatches)
 
     colour_swatches = colour_swatches_converted
 

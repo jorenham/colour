@@ -1183,7 +1183,7 @@ class MultiSignals(AbstractContinuousFunction):
             ):
                 signal_a.arithmetical_operation(signal_b, operation, True)
         else:
-            a = as_float_array(cast(ArrayLike, a))
+            a = as_float_array(cast("ArrayLike", a))
 
             attest(
                 a.ndim in range(3),
@@ -1444,7 +1444,7 @@ class MultiSignals(AbstractContinuousFunction):
         elif issubclass(type(data), Sequence) or isinstance(
             data, (tuple, list, np.ndarray, Iterator, ValuesView)
         ):
-            data_sequence = list(cast(Sequence, data))
+            data_sequence = list(cast("Sequence", data))
 
             is_signal = True
             for i in data_sequence:
@@ -1470,7 +1470,7 @@ class MultiSignals(AbstractContinuousFunction):
                 for i, range_unpacked in enumerate(data_array):
                     signals[str(i)] = signal_type(range_unpacked, domain, **settings)
         elif issubclass(type(data), Mapping) or isinstance(data, dict):
-            data_mapping = dict(cast(Mapping, data))
+            data_mapping = dict(cast("Mapping", data))
 
             is_signal = all(isinstance(i, Signal) for i in data_mapping.values())
 
@@ -1510,8 +1510,7 @@ class MultiSignals(AbstractContinuousFunction):
             for signal in signals.values():
                 attest(
                     len(domain_array) == len(signal.domain),
-                    'User "domain" length is not compatible with unpacked '
-                    '"signals"!',
+                    'User "domain" length is not compatible with unpacked "signals"!',
                 )
 
                 signal.domain = domain_array

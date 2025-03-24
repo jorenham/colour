@@ -691,7 +691,7 @@ def sd_to_XYZ_integration(
             "A spectral shape must be explicitly passed with a spectral data array!",
         )
 
-        shape = cast(SpectralShape, shape)
+        shape = cast("SpectralShape", shape)
 
         R = as_float_array(sd)
         shape_R = R.shape
@@ -719,7 +719,7 @@ def sd_to_XYZ_integration(
     d_w = cmfs.shape.interval
 
     with sdiv_mode():
-        k = cast(Real, optional(k, sdiv(100, (np.sum(XYZ_b[..., 1] * S) * d_w))))
+        k = cast("Real", optional(k, sdiv(100, (np.sum(XYZ_b[..., 1] * S) * d_w))))
 
     XYZ = k * np.dot(R * S, XYZ_b) * d_w
 
@@ -1274,8 +1274,7 @@ def sd_to_XYZ(
 
     if isinstance(sd, MultiSpectralDistributions):
         runtime_warning(
-            "A multi-spectral distributions was passed, enforcing integration "
-            "method!"
+            "A multi-spectral distributions was passed, enforcing integration method!"
         )
         function = sd_to_XYZ_integration
     else:

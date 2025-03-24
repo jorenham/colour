@@ -180,7 +180,7 @@ def XYZ_to_sd_Meng2015(
     def objective_function(a: ArrayLike) -> NDArrayFloat:
         """Define the objective function."""
 
-        return cast(NDArrayFloat, np.sum(np.diff(a) ** 2))
+        return cast("NDArrayFloat", np.sum(np.diff(a) ** 2))
 
     def constraint_function(a: ArrayLike) -> NDArrayFloat:
         """Define the constraint function."""

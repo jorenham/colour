@@ -403,7 +403,7 @@ class LUTOperatorMatrix(AbstractLUTSequenceOperator):
             [
                 f"{representation[:-1]},",
                 f"{indentation}"
-                f'{repr(self._offset).replace("array(", "").replace(")", "")},',
+                f"{repr(self._offset).replace('array(', '').replace(')', '')},",
                 f"{indentation}name='{self._name}'{comments})",
             ]
         )

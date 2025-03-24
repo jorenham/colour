@@ -911,7 +911,7 @@ class RGB_Colourspace:
 
         colourspace.name = (
             f"{colourspace.name} - Chromatically Adapted to "
-            f"{cast(str, optional(whitepoint_name, whitepoint))!r}"
+            f"{cast('str', optional(whitepoint_name, whitepoint))!r}"
         )
 
         return colourspace
@@ -1250,7 +1250,7 @@ def matrix_RGB_to_RGB(
             tuple(RGB_COLOURSPACES),
             '"{0}" "RGB" colourspace is invalid, it must be one of {1}!',
         )
-        input_colourspace = cast(RGB_Colourspace, RGB_COLOURSPACES[input_colourspace])
+        input_colourspace = cast("RGB_Colourspace", RGB_COLOURSPACES[input_colourspace])
 
     if isinstance(output_colourspace, str):
         output_colourspace = validate_method(
@@ -1258,7 +1258,7 @@ def matrix_RGB_to_RGB(
             tuple(RGB_COLOURSPACES),
             '"{0}" "RGB" colourspace is invalid, it must be one of {1}!',
         )
-        output_colourspace = cast(RGB_Colourspace, RGB_COLOURSPACES[output_colourspace])
+        output_colourspace = cast("RGB_Colourspace", RGB_COLOURSPACES[output_colourspace])
 
     M = input_colourspace.matrix_RGB_to_XYZ
 
@@ -1354,7 +1354,7 @@ def RGB_to_RGB(
             tuple(RGB_COLOURSPACES),
             '"{0}" "RGB" colourspace is invalid, it must be one of {1}!',
         )
-        input_colourspace = cast(RGB_Colourspace, RGB_COLOURSPACES[input_colourspace])
+        input_colourspace = cast("RGB_Colourspace", RGB_COLOURSPACES[input_colourspace])
 
     if isinstance(output_colourspace, str):
         output_colourspace = validate_method(
@@ -1362,7 +1362,7 @@ def RGB_to_RGB(
             tuple(RGB_COLOURSPACES),
             '"{0}" "RGB" colourspace is invalid, it must be one of {1}!',
         )
-        output_colourspace = cast(RGB_Colourspace, RGB_COLOURSPACES[output_colourspace])
+        output_colourspace = cast("RGB_Colourspace", RGB_COLOURSPACES[output_colourspace])
 
     RGB = to_domain_1(RGB)
 

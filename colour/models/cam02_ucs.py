@@ -697,9 +697,9 @@ def XYZ_to_UCS_Luo2006(
     specification = XYZ_to_CIECAM02(XYZ, **settings)
     JMh = tstack(
         [
-            cast(NDArrayFloat, specification.J),
-            cast(NDArrayFloat, specification.M),
-            cast(NDArrayFloat, specification.h),
+            cast("NDArrayFloat", specification.J),
+            cast("NDArrayFloat", specification.M),
+            cast("NDArrayFloat", specification.h),
         ]
     )
 

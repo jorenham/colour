@@ -71,18 +71,16 @@ Global variable storing the current *Colour* safe division function mode.
 """
 
 
-def get_sdiv_mode() -> (
-    Literal[
-        "Numpy",
-        "Ignore",
-        "Warning",
-        "Raise",
-        "Ignore Zero Conversion",
-        "Warning Zero Conversion",
-        "Ignore Limit Conversion",
-        "Warning Limit Conversion",
-    ]
-):
+def get_sdiv_mode() -> Literal[
+    "Numpy",
+    "Ignore",
+    "Warning",
+    "Raise",
+    "Ignore Zero Conversion",
+    "Warning Zero Conversion",
+    "Ignore Limit Conversion",
+    "Warning Limit Conversion",
+]:
     """
     Return *Colour* safe division mode.
 
@@ -142,16 +140,7 @@ def set_sdiv_mode(
     global _SDIV_MODE  # noqa: PLW0603
 
     _SDIV_MODE = cast(
-        Literal[
-            "Numpy",
-            "Ignore",
-            "Warning",
-            "Raise",
-            "Ignore Zero Conversion",
-            "Warning Zero Conversion",
-            "Ignore Limit Conversion",
-            "Warning Limit Conversion",
-        ],
+        "Literal['Numpy', 'Ignore', 'Warning', 'Raise', 'Ignore Zero Conversion', 'Warning Zero Conversion', 'Ignore Limit Conversion', 'Warning Limit Conversion']",
         validate_method(
             mode,
             (

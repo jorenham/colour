@@ -185,7 +185,7 @@ def IgPgTg_to_XYZ(IgPgTg: ArrayLike) -> NDArrayFloat:
         """
 
         return cast(
-            NDArrayFloat,
+            "NDArrayFloat",
             spow(LMS_p, 1 / 0.427) * np.array([18.36, 21.46, 19435]),
         )
 

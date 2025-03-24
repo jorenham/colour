@@ -185,7 +185,7 @@ def nadir_grid(
     """
 
     limits = as_float_array(optional(limits, np.array([[-1, 1], [-1, 1]])))
-    labels = cast(Sequence, optional(labels, ("x", "y")))
+    labels = cast("Sequence", optional(labels, ("x", "y")))
 
     extent = np.max(np.abs(limits[..., 1] - limits[..., 0]))
 
@@ -503,7 +503,7 @@ def plot_RGB_colourspaces_gamuts(
     ).get("model", model)
 
     colourspaces = cast(
-        List[RGB_Colourspace],
+        "List[RGB_Colourspace]",
         list(filter_RGB_colourspaces(colourspaces).values()),
     )  # pyright: ignore
 
@@ -528,11 +528,11 @@ def plot_RGB_colourspaces_gamuts(
     settings.update(kwargs)
 
     figure = plt.figure()
-    axes = cast(Axes3D, figure.add_subplot(111, projection="3d"))
+    axes = cast("Axes3D", figure.add_subplot(111, projection="3d"))
 
     points = zeros((4, 3))
     if show_spectral_locus:
-        cmfs = cast(MultiSpectralDistributions, first_item(filter_cmfs(cmfs).values()))
+        cmfs = cast("MultiSpectralDistributions", first_item(filter_cmfs(cmfs).values()))
         XYZ = cmfs.values
 
         points = colourspace_model_axis_reorder(
@@ -645,7 +645,7 @@ def plot_RGB_colourspaces_gamuts(
     settings.update({"axes": axes, "axes_visible": False, "camera_aspect": "equal"})
     settings.update(kwargs)
 
-    return cast(Tuple[Figure, Axes3D], render(**settings))
+    return cast("Tuple[Figure, Axes3D]", render(**settings))
 
 
 @override_style()
@@ -740,10 +740,10 @@ def plot_RGB_scatter(
     RGB = np.reshape(as_float_array(RGB)[..., :3], (-1, 3))
 
     colourspace = cast(
-        RGB_Colourspace,
+        "RGB_Colourspace",
         first_item(filter_RGB_colourspaces(colourspace).values()),
     )
-    colourspaces = cast(List[str], optional(colourspaces, [colourspace.name]))
+    colourspaces = cast("List[str]", optional(colourspaces, [colourspace.name]))
 
     convert_kwargs = optional(convert_kwargs, {})
 
@@ -793,4 +793,4 @@ def plot_RGB_scatter(
     settings.update({"axes": axes, "show": True})
     settings.update(kwargs)
 
-    return cast(Tuple[Figure, Axes3D], render(**settings))
+    return cast("Tuple[Figure, Axes3D]", render(**settings))

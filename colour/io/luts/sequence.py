@@ -141,8 +141,7 @@ class LUTSequence(MutableSequence):
         for item in value:
             attest(
                 isinstance(item, ProtocolLUTSequenceItem),
-                '"value" items must implement the "ProtocolLUTSequenceItem" '
-                "protocol!",
+                '"value" items must implement the "ProtocolLUTSequenceItem" protocol!',
             )
 
         self._sequence = list(value)
@@ -179,8 +178,7 @@ class LUTSequence(MutableSequence):
         for item in value if is_iterable(value) else [value]:
             attest(
                 isinstance(item, ProtocolLUTSequenceItem),
-                '"value" items must implement the "ProtocolLUTSequenceItem" '
-                "protocol!",
+                '"value" items must implement the "ProtocolLUTSequenceItem" protocol!',
             )
 
         self._sequence[index] = value
